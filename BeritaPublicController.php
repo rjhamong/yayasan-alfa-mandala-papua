@@ -1,0 +1,20 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Models\Berita;
+
+class BeritaController extends Controller
+{
+    public function index()
+    {
+        $beritas = Berita::latest()->paginate(6);
+        return view('berita.index', compact('beritas'));
+    }
+
+    public function show($slug)
+    {
+        $berita = Berita::where('slug', $slug)->firstOrFail();
+        return view('berita.show', compact('berita'));
+    }
+}
